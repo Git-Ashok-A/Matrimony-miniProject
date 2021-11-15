@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+		<meta charset="utf-8">
+		<title>New User</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="author" content="colorlib.com">
+        
+		<link rel="stylesheet" href="../static/styles/css/style.css">
+        
+        <style>
+            .stream-container{
+                background-color: darkgray;
+                margin-top: 10%;
+                position: relative;
+                padding: 10px;
+                padding-top: 30px;
+                height: auto;
+                width: 50%;
+                overflow: hidden;
+                
+            }
+            #video{
+                position: relative;
+                max-width: 500px;
+                width:auto;
+                height: auto;
+                /* margin-left: 50px; */
+                border: 2px solid black;
+                padding: 10px;
+                border-radius: 5px;
+            }
+
+
+        </style>
+
+
+
+
+    
+	</head>
+    <header>
+        <a style="text-decoration:none;"href="{{ url_for('home') }}">  <h1 style="color:white;">Authenticated Secure Matrimony</h1></a>
+  
+        </header>
+	<body style="background-image: url(../static/images/loginpage.jpg)" >
+
+
+
+            <script type="text/javascript" src="{{ url_for('static', filename='Jscripts/camera.js') }}"></script>
+            <center>
+
+            
+            <div class="stream-container">
+                <h3 style="color: white;font-size:medium">Capture capture by pressing the space key</h3>
+                <!-- <video id="video"autoplay></video>
+                <canvas id="canvas" class="canvas-wrapper"></canvas> -->
+                <h3>Capture capture by pressing the space key</h3>
+                <video id="video" width="640" height="480" autoplay></video>
+                <canvas id="canvas" class="canvas-wrapper"></canvas>
+                <br>
+                <button onclick="caputre()" >Capture</button>
+                <button>Submit</button>
+            </div>
+        </center>
+
+    </body>
+    
+        <!-- <script>
+            var video = document.getElementById('video');
+        // getUserMedia()Get camera footage with
+        var media = navigator.mediaDevices.getUserMedia({ video: true });
+        //Pour into video tags for real-time playback (streaming)
+        media.then((stream) => {
+            video.srcObject = stream;
+        });
+        
+        var canvas = document.getElementById('canvas');
+        canvas.setAttribute('width', video.width);
+        canvas.setAttribute('height', video.height);
+        
+        video.addEventListener(
+            'timeupdate',
+            function () {
+                var context = canvas.getContext('2d');
+                context.drawImage(video, 0, 0, video.width, video.height);
+            },
+            true
+        );
+        
+        
+        
+        //Set the listener that executes capture acquisition when the space key is pressed
+        document.addEventListener('keydown', (event) => {
+            var keyName = event.key;
+            if (keyName === ' ') {
+                console.log(`keydown: SpaceKey`);
+                context = canvas.getContext('2d');
+                //Remove the head of the acquired base64 data
+                var img_base64 = canvas.toDataURL('image/jpeg').replace(/^.*,/, '')
+                captureImg(img_base64);
+            }
+        });
+        
+        var xhr = new XMLHttpRequest();
+        
+        //Captured image data(base64)POST
+        function captureImg(img_base64) {
+            const body = new FormData();
+            body.append('img', img_base64);
+        xhr.open("POST", 'http://localhost:8000/capture_img', true);
+            xhr.onload = () => {
+                console.log(xhr.responseText)
+            };
+            xhr.send(body);
+        }
+        </script>
+        <style>
+            /*Hide canvas*/
+            #canvas {
+                display: none !important;
+            }
+        </style> -->
+
+        <script>
+            var video = document.getElementById('video');
+        // getUserMedia()Get camera footage with
+        var media = navigator.mediaDevices.getUserMedia({ video: true });
+        //Pour into video tags for real-time playback (streaming)
+        media.then((stream) => {
+            video.srcObject = stream;
+        });
+        
+        var canvas = document.getElementById('canvas');
+        canvas.setAttribute('width', video.width);
+        canvas.setAttribute('height', video.height);
+        
+        video.addEventListener(
+            'timeupdate',
+            function () {
+                var context = canvas.getContext('2d');
+                context.drawImage(video, 0, 0, video.width, video.height);
+            },
+            true
+        );
+        
+        
+        
+        //Set the listener that executes capture acquisition when the space key is pressed
+        document.addEventListener('keydown', (event) => {
+            var keyName = event.key;
+            if (keyName === ' ') {
+                console.log(`keydown: SpaceKey`);
+                context = canvas.getContext('2d');
+                //Remove the head of the acquired base64 data
+                var img_base64 = canvas.toDataURL('image/jpeg').replace(/^.*,/, '')
+                captureImg(img_base64);
+            }
+        });
+        
+        var xhr = new XMLHttpRequest();
+        
+        //Captured image data(base64)POST
+        function captureImg(img_base64) {
+            const body = new FormData();
+            var username = window.localStorage.getItem('username')
+            body.append('img', img_base64);
+            body.append('username',username);
+        xhr.open("POST", 'http://localhost:8000/capture_img', true);
+            xhr.onload = () => {
+                console.log(xhr.responseText)
+            };
+            xhr.send(body);
+        }
+        
+        
+        </script>
+        <style>
+            /*Hide canvas*/
+            #canvas {
+                display: none !important;
+            }
+        </style>
+
+</html>
+
+

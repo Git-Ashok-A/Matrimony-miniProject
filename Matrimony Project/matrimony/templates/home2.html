@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <title>Authenticated Secure Matrimony</title>
+    <script>
+      AOS.init();
+    </script>
+    <meta charset="utf-8">
+    <meta name="author" content="ASHOK">
+    <meta name="tech" content="All about tech news">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/styles/css/home_style.css">
+
+    
+
+  <style>
+   body{
+    background-image: url('../static/images/homepage2.jpg'); 
+    background-size: cover;
+    background-repeat: no-repeat;
+    letter-spacing: 2px;
+    font-style: oblique;
+    padding: inherit;
+    background-color: #0b162b;
+    font-family: Artifika;
+  }
+  .feedback_container{
+    background-color: whitesmoke;
+    border: 1px solid black;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 5px;
+    padding: 20px;
+    max-width: 500px;
+  }
+  #feedback_photo{
+    height: 150;
+    width: 100px;
+    border-radius: 10px;
+    clear: right;
+  }
+  #img-content-container{
+    display: flex;
+    padding: 5px;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(240, 240, 193);
+    border-radius: 10px;
+  }
+  #story{
+    font-style: italic;
+    padding-left: 20px;
+  }
+  
+  </style>
+
+  </head>
+
+  <body>
+    <div style="background-image:url('loginpage.jpg'); text-align:center; padding:15px;">
+      <header>
+      <a style="text-decoration:none;"href="{{ url_for('home') }}">  <h1 style="color:white;">Authenticated Secure Matrimony</h1></a>
+
+      </header>
+    </div>
+
+    <div class="sticky">
+      <div>
+        <ul class="navbar">
+          <li><a class="active" href="{{url_for('home')}}"> HOME </a></li>
+          <li><a href="{{url_for('match_finder')}}"> Find Your Match </a></li>
+          <li><a href="mailto:abcd@gmail.com">CONTACT US </a></li>
+          <li style="float:right;"><a style="margin-right:0" href="#about">ABOUT</a></li>
+          <li style="float:right;" class="dropdown">
+            <a href="#" class="dropbtn">PROFILE</a>
+            <div class="dropdown-content">
+                {% block content %}
+                {% if profile %}
+                    <a href="{{ url_for('myProfile') }}">My Profile</a>
+                    <!-- <a onclick="window.location = 'http://localhost:8000/dropsession'">Log Out</a> -->
+                    <a onclick="window.location.href='{{ url_for( 'dropsession') }}';">Log Out</a>
+                    
+                {% else %}
+                    <a href="{{ url_for('login') }}">Log In</a>
+                    <a href="{{ url_for('newUser') }}">Register</a>
+                {% endif %}
+                {% endblock %}          
+              <!-- <a href="#">something</a> -->
+            </div>
+          </li>
+          <li style="float:right;"><a style="margin-right:0" href="{{url_for('interest')}}">INTEREST</a></li>
+        </ul>
+      </div>
+    </div>
+
+
+  <h3 style="color: white;margin-left: 100px;">Feedback And Stories</h3>
+  {% block feedback %}
+  {% for feed  in feedback %}
+
+<div class="feedback_container">
+  <h3 style="text-align: center; margin-top: 0px;"> {{feed[2]}} Married {{feed[3]}} </h3>
+    
+  <div id="img-content-container">
+    <div style="flex-basis: 40%;">
+      <img id="feedback_photo" src="../{{feed[1]}}" alt="">
+    </div>
+      <div id="story">
+          <h3>Story:</h3>
+          <p> {{feed[4]}} </p>
+      </div>
+      </div>
+  </div>
+<br>
+{% endfor %}
+
+{% endblock %}
+<!-- <div class="card_containter">
+<div>
+  feedback and stories
+ </div>
+</div>
+<div class="card_containter">
+  feedback and stories
+</div>
+<div class="card_containter">
+  feedback and stories
+</div> -->
+<footer>
+  <div style="background-color:#0f1a36;text-align:center;padding:10px;margin-top:7px;">
+    © copyright
+<a class="footer" href="#"> <p class="footer">terms & comditions</p></a>
+<a class="footer" href="#"> <p class="footer"> About us</p></a>
+<a class="footer" href="{{url_for('feedback')}}"><p class="footer">Feedback </p></a>
+<a class="footer" href="#"> <p class="footer"> Contact</p></a>
+
+<a class="footer" href="#">  <p class="footer">privacy policy</p></a>
+
+  </div>
+</footer>
+  </body>
+</html>

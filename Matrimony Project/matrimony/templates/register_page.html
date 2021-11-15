@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!--<link rel="stylesheet" type="text/css" href="style/form.css"> -->
+    <title>FORM</title>
+   <style>
+   * {
+    box-sizing: border-box;
+}
+
+form {
+    padding: 30px;
+}
+
+body {
+    background-color: white
+}
+
+input[type=text],
+select,
+textarea {
+    width: 50%;
+    padding: 12px;
+    border-bottom: 1px solid black;
+    border-radius: 4px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    resize: vertical;
+    transition: width 0.4s ease-in-out;
+    position: relative;
+}
+
+input[type=text]:focus {
+    width: 55%;
+}
+
+lable {
+    color: black;
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+}
+
+input[type=reset] {
+    background-color: blue;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 12px 20px;
+    float: left;
+}
+
+input[type=submit] {
+    background-color: blue;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 12px 20px;
+    float: right;
+}
+
+input[type=reset]:hover {
+    background-color: #45a049;
+}
+
+input[type=submit]:hover {
+    background-color: #45a049;
+}
+
+.container {
+    border-radius: 5px;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+.col-25 {
+    float: left;
+    width: 25%;
+    margin-top: 6px;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+@media screen and (max-width: 600px) {
+    .col-25,
+    .col-75,
+    input[type=submit] {
+        width: 100%;
+        margin-top: 0;
+    }
+}
+
+label {
+    color: black
+}
+
+.container {
+    border-radius: 5px;
+    background-color: white;
+    padding: 20px;
+}
+
+
+/* wizard */
+
+button {
+    background-color: #4CAF50;
+    color: #ffffff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 17px;
+    font-family: Raleway;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+#prevBtn {
+    background-color: #bbbbbb;
+}
+
+#regForm {
+    background-color: #ffffff;
+    margin: 100px auto;
+    font-family: Raleway;
+    padding: 40px;
+    width: 70%;
+    min-width: 300px;
+}
+
+.tab {
+    display: none;
+}
+
+#prevBtn {
+    background-color: #bbbbbb;
+}
+
+
+/* Make circles that indicate the steps of the form: */
+
+.step {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbbbbb;
+    border: none;
+    border-radius: 50%;
+    display: inline-block;
+    opacity: 0.5;
+}
+
+.step.active {
+    opacity: 1;
+}
+
+
+/* Mark the steps that are finished and valid: */
+
+.step.finish {
+    background-color: #4CAF50;
+}
+    </style>
+</head>
+
+<body>
+
+    <h1>FORM</h1>
+    <div class="container">
+        <form action="{{url_for('register')}}" method="POST">
+            <div class="row">
+                <div class="col-25">
+
+                    <label for="fname"> First Name </label>
+                </div>
+                <div class="col-75">
+                    <input type="text" name="fname" placeholder="Your Name">
+
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-25">
+
+                    <label for="lname">Last Name</label>
+                </div>
+
+                <div class="col-75">
+                    <input type="text" id="lname" name="lname" placeholder="Your last name.."><br><br>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-25">
+                    <label for="Gender"> Gender</label>
+                </div>
+                <div class="col-75">
+                    <input type="radio" id="male" name="gender" value="male">
+                    <label for="male">Male</label>
+
+                    <input type="radio" id="male" name="gender" value="female">
+                    <label for="female">female</label>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-25">
+                    <label for="dob">Date of Birth</label>
+                </div>
+                <div class="col-75">
+                    <input type="date" id="dob" , name="dob">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-25">
+                    <label for="age">Age</label>
+                </div>
+                <div class="col-75">
+                    <input type="number" id="age" name="age">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-25">
+                    <label for="religion">Religion</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="religion" name="religion" value="">
+                </div>
+            </div>
+            <br>
+            <!-- nationality -->
+            <br>
+            <div class="row">
+                <div class="col-25">
+                    <label for="country">Country</label>
+                </div>
+
+                <div class="col-75">
+                    <select id="country" name="country">
+
+				<option value="NONE"> --Select--</option>
+				<option value="India">India</option>
+				<option value="America">America</option>
+				<option value="Germany" > Germany</option>
+				<option value="Russia"> Russia </option>
+				<option value="canada"> Canada </option>
+			</select><br><br>
+                </div>
+            </div>
+            <br>
+            <!-- father  -->
+            <div class="row">
+                <div class="col-25">
+                    <label for="father">Father</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="father" name="father" value="">
+                </div>
+            </div>
+            <br>
+            <!-- mother -->
+            <div class="row">
+                <div class="col-25">
+                    <label for="mother">Mother</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="mother" name="mother" value="">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-25">
+                    <label for="father_occ">Father Occupation</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="father_occ" name="father_occ" value="">
+                </div>
+            </div>
+            <br>
+            <!-- mother occupation -->
+            <div class="row">
+                <div class="col-25">
+                    <label for="mother_occ">Mother Occupation</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="mother_occ" name="mother_occ" value="">
+                </div>
+            </div>
+            <br>
+            <!-- mother tounge -->
+            <div class="row">
+                <div class="col-25">
+                    <label for="mother_tounge">Mother Tounge</label>
+                </div>
+
+                <div class="col-75">
+                    <select id="country" name="mother_tounge">
+
+				<option value="NONE"> --Select--</option>
+				<option value="tamil">Tamil</option>
+				<option value="english">English</option>
+				<option value="kanadam" > Kanadam</option>
+				<option value="telegu"> Telegu </option>
+                <option value="malayalam"> Malayalam </option>
+                <option value="hindi"> Hindi </option>
+			</select><br><br>
+                </div>
+            </div>
+            <br>
+            <!-- qualification -->
+            <div class="row">
+                <div class="col-25">
+                    <label for="qualification">Qualification</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="qualification" name="qualification" value="">
+                </div>
+            </div>
+            <br>
+            <!-- occupation -->
+            <div class="row">
+                <div class="col-25">
+                    <label for="occupation">Occupation</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="occupation" name="occupation" value="">
+                </div>
+            </div>
+            <br>
+            <!-- salary -->
+            <div class="row">
+                <div class="col-25">
+                    <label for="salary">Salary per month</label>
+                </div>
+                <div class="col-75">
+                    <input type="number" id="salary" name="salary" value="">
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-25">
+                    <label for="subject">Address</label>
+                </div>
+                <div class="col-75">
+
+                    <textarea id="address" name="address" placeholder="Your address here" style="height: 100px;width:200px"></textarea>
+                </div>
+            </div>
+            <br>
+            <!-- pincode -->
+            <div class="row">
+                <div class="col-25">
+                    <label for="pincode">Pincode</label>
+                </div>
+                <div class="col-75">
+                    <input type="number" id="pincode" name="pincode" value="">
+                </div>
+            </div>
+            <br>
+            <!-- state -->
+            <div class="row">
+                <div class="col-25">
+                    <label for="state">State</label>
+                </div>
+
+                <div class="col-75">
+                    <select id="state" name="state">
+
+				<option value="NONE"> --Select--</option>
+				<option value="tamil_nadu">Tamil Nadu</option>
+				<option value="kerla">Kerla</option>
+				<option value="pondicherry" > Pondicherry</option>
+				<option value="andhra_pradesh"> Andhra Pradesh </option>
+                <option value="delhi"> Delhi </option>
+                <option value="goa"> Goa </option>
+			</select><br><br>
+                </div>
+            </div>
+            <br>
+            <!-- adharcard number -->
+            <div class="row">
+                <div class="col-25">
+                    <label for="addhar">Addhar Number</label>
+                </div>
+                <div class="col-75">
+                    <input type="number" id="addhar" name="addhar" value="">
+                </div>
+            </div>
+            <br>
+            <!-- mobile number -->
+            <div class="row">
+                <div class="col-25">
+                    <label for="mobile_number">Mobile Number</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="mobile_number" name="mobile_number" value="">
+                </div>
+            </div>
+            <br>
+            <!--Alternate mobile number -->
+            <div class="row">
+                <div class="col-25">
+                    <label for="alternate_num">Alternate Mobile Number</label>
+                </div>
+                <div class="col-75">
+                    <input type="text" id="alternate_num" name="alternate_num" value="">
+                </div>
+            </div>
+            <br>
+
+
+            <div class="row">
+                <div class="col-25">
+                    <label for="subject">Subject</label>
+                </div>
+                <div class="col-75">
+
+                    <textarea id="subject" name="subject" placeholder="write something...." style="height: 200px"></textarea>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <input type="submit" value="Submit">
+            </div>
+            <br>
+            <div class="row">
+                <input type="reset" value="Reset">
+            </div>
+        </form>
+    </div>
+
+
+</body>
+
+</html>

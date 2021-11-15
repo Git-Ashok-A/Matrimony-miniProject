@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="../static/styles/css/home_style.css">
+  <link rel="stylesheet" href="../static/styles/css/find_match.css">
+
+
+  <title>Search</title>
+   <style media="screen">
+      body{
+    background-image: url('../static/images/homepage2.jpg'); 
+    background-size: cover;
+    background-repeat: no-repeat;
+    letter-spacing: 2px;
+    font-style: oblique;
+    padding: inherit;
+    background-color: #0b162b;
+    font-family: Artifika;
+    overflow-x: hidden;
+  }
+  </style>
+</head>
+<body>
+
+  <div style="background-image:url('loginpage.jpg'); text-align:center; padding:15px;">
+    <header>
+    <a style="text-decoration:none;"href="{{ url_for('home') }}">  <h2 style="color:white;">Authenticated Secure Matrimony</h2></a>
+
+    </header>
+  </div>
+
+  <div class="sticky">
+    <div>
+      <ul class="navbar">
+        <li><a href="{{url_for('home')}}"> HOME </a></li>
+        <li><a class="active" href="{{url_for('match_finder')}}"> Find Your Match </a></li>
+        <li><a href="mailto:abcd@gmail.com">CONTACT US </a></li>
+        <li style="float:right;"><a style="margin-right:0" href="#about">ABOUT</a></li>
+        <li style="float:right;" class="dropdown">
+          <a href="#" class="dropbtn">PROFILE</a>
+          <div class="dropdown-content">
+              {% block content %}
+              {% if profile %}
+                  <a href="{{ url_for('myProfile') }}">My Profile</a>
+                  <a onclick="window.location.href='{{ url_for( 'dropsession') }}';">Log Out</a>
+                  {% else %}
+                  <a href="{{ url_for('login') }}">Log In</a>
+                  <a href="{{ url_for('newUser') }}">Register</a>
+              {% endif %}
+              {% endblock %}          
+            <!-- <a href="#">something</a> -->
+          </div>
+        </li>
+        <li style="float:right;"><a style="margin-right:0" href="{{url_for('interest')}}">INTEREST</a></li>
+      </ul>
+    </div>
+  </div>
+ 
+      <div class="container">
+        <h1 style="text-align: center;">Search Your Pair</h1>
+        <form action="{{url_for('search_result')}}" method = 'POST'>
+          <table class="search-table">
+            <tr>
+              <th class="lable">Gender</th>
+              <td>          <select name="gender" id="gender"  class="form-control">
+                <option value="NONE"> --Select--</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <th class="lable">Age Range</th>
+              <td>
+                <input type="number" id="from_age" name="from_age" value="20" placeholder="From">
+                <input type="number" id="to_age" name="to_age" value="35" placeholder="To">
+              </td>
+            </tr>
+            <tr>
+              <th class="lable">Height Range in CM</th>
+              <td>
+                <input type="number" id="from_height" name="from_height" value="150" placeholder="From in CM">
+                <input type="number" id="from_height" name="to_height" value="200" placeholder="To in CM">      
+              </td>
+            </tr>
+            <tr>
+              <th class="lable">Language</th>
+              <td>
+                <select id="mother_tounge" name="mother_tounge" class="form-control">
+                  <option value="NONE"> --Select--</option>
+                  <option value="tamil">Tamil</option>
+                  <option value="english">English</option>
+                  <option value="kanadam" > Kanadam</option>
+                  <option value="telegu"> Telegu </option>
+                  <option value="malayalam"> Malayalam </option>
+                  <option value="hindi"> Hindi </option>
+              </select>
+              </td>
+            </tr>
+            <tr>
+              <th class="lable">Religion</th>
+              <td>
+                <select id="religion" name="religion" class="form-control">
+                  <option value="NONE"> --Select--</option>
+                  <option value="hindu">Hindu</option>
+                  <option value="Christian">Christian</option>
+                  <option value="Buddhist" > Buddhist</option>
+                  <option value="Islam"> Islam </option>
+              </select>  
+              </td>
+            </tr>
+            <tr>
+              <th class="lable">Caste</th>
+              <td>
+                <select id="caste" name="caste" class="form-control">
+                  <option value="NONE"> --Select--</option>
+                  <option value="general">General(GNs)</option>
+                  <option value="obc">Other Backward Class(OBC)</option>
+                  <option value="sc" > Scheduled Caste(SC)</option>
+                  <option value="st"> Scheduled Tribe(ST) </option>
+              </select>
+              </td>
+            </tr>
+            <tr>
+              <th class="lable">Marital status</th>
+              <td>
+                <select id="material_status" name="material_status" class="form-control">
+                  <option value="NONE"> --Select--</option>
+                  <option value="widow">Widow</option>
+                  <option value="bachelor">Bachelor</option>
+                  <option value="divorced" > divorced</option>
+                  <option value="not_married"> Not Married </option>
+              </select>  
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2" style="text-align: center;">
+                <input type="submit" name="" value="Search">
+                <button class="profile-result-btn" type="button" onclick="window.location.href='{{ url_for( 'show_all_profiles') }}';">Show All Profiles</button>
+              </td>
+
+            </tr>
+          </table>
+        </form>
+      </div>
+      <br>
+      <br>
+      <div class="footer_container" style="text-align: center;">
+        <footer class="footer">
+                         © copyright
+                       <a class="footer" href="#"> <p class="footer">terms & comditions</p></a>
+                       <a class="footer" href="#"> <p class="footer"> About us</p></a>
+                        <a class="footer" href="#"><p class="footer">Feedback </p></a>
+                         <a class="footer" href="#"> <p class="footer"> Contact</p></a>
+        
+                         <a class="footer" href="#">  <p class="footer">privacy policy</p></a>
+        
+         </footer>
+    </div>
+</body>
+</html>

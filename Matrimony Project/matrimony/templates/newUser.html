@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+		<meta charset="utf-8">
+		<title>New User</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="author" content="colorlib.com">
+
+		<link rel="stylesheet" href="../static/styles/css/style.css">
+  
+
+
+
+
+    
+	</head>
+    <header>
+        <a style="text-decoration:none;"href="{{ url_for('home') }}">  <h1 style="color:white;">Authenticated Secure Matrimony</h1></a>
+  
+        </header>
+	<body style="background-image: url(../static/images/loginpage.jpg)" >
+
+
+
+            <script type="text/javascript" src="{{ url_for('static', filename='Jscripts/new_user_formValidate.js') }}"></script>
+
+    <center>
+        {% if alert %}
+            <div class="alert alert-warning alert-dismissible" style="width: 300px;">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Account Alread Exist!</strong>
+            </div>
+        {% endif %}
+		<div class="wrapper">
+            <form action="{{url_for('upload')}}" method="POST" onsubmit=" return validateForm()" id="wizard" enctype = "multipart/form-data">
+        		<!-- SECTION 1 -->
+
+                <h4></h4>
+                <section>
+                    <h3>User profile</h3>
+                	<div class="form-row">
+                        <div class="form-col">
+                            <label for="fname">
+                                Full Name
+                            </label>
+                            <div class="form-holder">
+                                <i class="zmdi zmdi-account-o"></i>
+                                <input type="text" placeholder="Full name..." oninput="this.className = ''" class="form-control" id="fname" name="fname" required>
+                            </div>
+                        </div>
+                        <div class="form-col">
+                            <label for="dob">
+                                Dat of Birth 
+                            </label>
+                            <div class="form-holder">
+                                <i class="zmdi zmdi-account-o"></i>
+                                <input type="date" name="dob" id="dob" placeholder="DOB" oninput="this.className = ''"  class="form-control" required>
+                            </div>
+                        </div>
+                	</div>
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label for="age">
+                                Age
+                            </label>
+                            <div class="form-holder">
+                                <i class="zmdi"></i>
+                                <input type="number"  class="form-control" name="age" id="age" placeholder="Your Age" oninput="this.className = ''" required>
+                            </div>
+                        </div>
+                        <div class="form-col">
+                            <label for="gender">
+                                Gender 
+                            </label>
+                            <div class="form-holder">
+                                <i class="zmdi"></i>
+                                <select name="gender" id="gender"  class="form-control" required>
+                                <option value="NONE"> --Select--</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label for="height">
+                                Height in CM
+                            </label>
+                            <div class="form-holder">
+                                <i class="zmdi zmdi-spellcheck"></i>
+                                 <input type="number" name="height" id="height"  class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-col">
+                            <label for="color_complexion">
+                                Color Complexion
+                            </label>
+                            <div class="form-holder">
+                                <i class="zmdi"></i>
+                               <input type="text" name="complexion" id="complexion" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="form-row">
+                        <div class="form-col">
+                            <label for="qulification">
+                                Highest Qualification 
+                            </label>
+                            <div class="form-holder">
+                                <i class="zmdi zmdi-spellcheck"></i>
+                                <input type="text" name="highest_education" id="highest_education" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-col">
+                            <label for="profession">
+                                Profession
+                            </label>
+                            <div class="form-holder">
+                                <i class="zmdi"></i>
+                                <input type="text" name="profession" id="profession" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="form-row">
+                        <div class="form-col">
+                            <label for="salary">
+                                Salary
+                            </label>
+                            <div class="form-holder">
+                                <i class="zmdi zmdi-spellcheck"></i>
+                                <input type="text" name="salary" id="salary" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-col">
+                            <label for="working_place">
+                                Working Place
+                            </label>
+                            <div class="form-holder">
+                                <i class="zmdi"></i>
+                                <input type="text" name="working_place" id="working_place" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="form-row">
+                        <div class="form-col">
+                            <label for="native_place">
+                                Native Place
+                            </label>
+                            <div class="form-holder">
+                                <i class="zmdi zmdi-spellcheck"></i>
+                                <input type="text" name="native_place" id="native_place" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-col">
+                            <label for="mother_tounge">
+                                Mother Tounge
+                            </label>
+                            <div class="form-holder">
+                                <i class="zmdi"></i>
+                                <select id="mother_tounge" name="mother_tounge" class="form-control" required>
+                                    <option value="NONE"> --Select--</option>
+                                    <option value="tamil">Tamil</option>
+                                    <option value="english">English</option>
+                                    <option value="kanadam" > Kanadam</option>
+                                    <option value="telegu"> Telegu </option>
+                                    <option value="malayalam"> Malayalam </option>
+                                    <option value="hindi"> Hindi </option>
+                                </select>
+                          </div>
+                        </div>
+                    </div>
+                     <div class="form-row">
+                        <div class="form-col">
+                            <label for="religion">
+                                Religion
+                            </label>
+                            <div class="form-holder">
+                                <i class="zmdi zmdi-spellcheck"></i>
+                                <select id="religion" name="religion" class="form-control" required>
+                                    <option value="NONE"> --Select--</option>
+                                    <option value="hindu">Hindu</option>
+                                    <option value="Christian">Christian</option>
+                                    <option value="Buddhist" > Buddhist</option>
+                                    <option value="Islam"> Islam </option>
+                                </select>                            </div>
+                        </div>
+                        <div class="form-col">
+                            <label for="Caste">
+                                Caste
+                            </label>
+                            <div class="form-holder">
+                                <i class="zmdi"></i>
+                                <select id="caste" name="caste" class="form-control" required>
+                                    <option value="NONE"> --Select--</option>
+                                    <option value="general">General(GNs)</option>
+                                    <option value="obc">Other Backward Class(OBC)</option>
+                                    <option value="sc" > Scheduled Caste(SC)</option>
+                                    <option value="st"> Scheduled Tribe(ST) </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="form-row">
+                        <div class="form-col">
+                            <label for="material_status">
+                                Maritel Status
+                            </label>
+                            <div class="form-holder">
+                                <i class="zmdi zmdi-spellcheck"></i>
+                                <select id="material_status" name="material_status" class="form-control" required>
+                                    <option value="NONE"> --Select--</option>
+                                    <option value="widow">Widow</option>
+                                    <option value="bachelor">Bachelor</option>
+                                    <option value="divorced" > divorced</option>
+                                    <option value="not_married"> Not Married </option>
+                                </select>                            </div>
+                        </div>
+                        <div class="form-col">
+                            <label for="Physical_status">
+                                Physical Status
+                            </label>
+                            <div class="form-holder">
+                                <i class="zmdi"></i>
+                                <input type="text" name="physical_status" id="physical_status" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label for="degree">
+                                Upload Degree Certificate (in PDF format)
+                            </label>
+                            <div class="form-holder">
+                                <i class="zmdi zmdi-pin"></i>
+                                <!-- <input type = "file" name = "test" /> -->
+                                <input type='file' id='degree_certificate' class="form-control" name = 'degree_certificate' required >
+                            </div>
+                        </div>
+                        <div class="form-col">
+                            <label for="caste">
+                                Upload Caste Certificate (in PDF format)
+                            </label>
+                            <div class="form-holder">
+                                <i class="zmdi zmdi-pin"></i>
+                                <!-- <input type = "file" name = "test" /> -->
+                                <input type='file' id='caste_certificate' class="form-control" name = 'caste_certificate' required >
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label for="birth">
+                                Upload Birth Certificate (in PDF format)
+                            </label>
+                            <div class="form-holder">
+                                <i class="zmdi zmdi-pin"></i>
+                                <!-- <input type = "file" name = "test" /> -->
+                                <input type='file' id='birth_certificate' class="form-control" name = 'birth_certificate' required >
+                            </div>
+                        </div>
+                        <div class="form-col">
+                            <label for="photo">
+                                Upload Profile Photo (in JPG format)
+                            </label>
+                            <div class="form-holder">
+                                <i class="zmdi zmdi-pin"></i>
+                                <!-- <input type = "file" name = "test" /> -->
+                                <input type='file' id='photo' class="form-control" name = 'photo' required >
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+				<!-- SECTION 2 -->
+                <h4></h4>
+                <section>
+                	<h3>Parent's Details</h3>
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label for="father_name">
+                                Father Name
+                            </label>
+                            <div class="form-holder">
+                                <i class="zmdi zmdi-account-o"></i>
+                                <input type="text" id="father" name="father" value="" class="form-control" required>
+                                <i class="zmdi zmdi-chevron-down"></i>
+                            </div>
+                        </div>
+                        <div class="form-col">
+                            <label for="mother_name">
+                                Mother Name
+                            </label>
+                            <div class="form-holder">
+                                <i class="zmdi zmdi-account-o"></i>
+                                <input type="text" id="mother" name="mother" value="" class="form-control" required>                            </div>
+                            </div>
+                        </div>
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label for="father_occ">
+                                Father Occupation 
+                            </label>
+                            <div class="form-holder">
+                                <i class="zmdi zmdi-home"></i>
+                                <input type="text" id="father_occ" name="father_occ" value="" class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-col">
+                            <label for="mmother_occ">
+                                Mother Occupation
+                            </label>
+                            <div class="form-holder">
+                                <i class="zmdi zmdi-pin-drop"></i>
+                                <input type="text" id="mother_occ" name="mother_occ" value="" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label for="no_brothers">
+                                Number of Brothers 
+                            </label>
+                            <div class="form-holder">
+                                <i class="zmdi zmdi-pin"></i>
+                                <input type="text" name="num_of_brothers" id="num_of_brothers"  class="form-control" required>
+                            </div>
+                        </div>
+                        <div class="form-col">
+                            <label for="no_sisters">
+                                Number Of sisters
+                            </label>
+                            <div class="form-holder password">
+                                <i class="zmdi zmdi-eye"></i>
+                                <input type="text" name="num_of_sisters" id="num_of_sisters" class="form-control" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label for="abt_family">
+                                About Family
+                            </label>
+                            <div class="form-holder">
+                                <i class="zmdi zmdi-pin"></i>
+                                <textarea id="about_famly" class="form-control" name="about_famly" placeholder="Type Here" style="height: 100px;width:200px" required></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </section>
+
+                <!-- SECTION 3 -->
+                <h4></h4>
+                <section>
+                	<h3> Contact and Login Details</h3>
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label for="Mobile Number">
+                                Mobile Number:
+                            </label>
+                            <div class="form-holder">
+                                <i class="zmdi zmdi-pin"></i>
+                                <input id="mobile_number" class="form-control" name="mobile_number" placeholder="Mobile Numbers" required >
+                            </div>
+                        </div>
+                        <div class="form-col">
+                            <label for="alternate Number">
+                               Alternate Mobile Number:
+                            </label>
+                            <div class="form-holder">
+                                <i class="zmdi zmdi-pin"></i>
+                                <input id="alt_mobile_number" class="form-control" name="alt_mobile_number" placeholder="Mobile Numbers" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label for="mailId">
+                                Email ID
+                            </label>
+                            <div class="form-holder">
+                                <i class="zmdi zmdi-pin"></i>
+                                <input id="email_id" class="form-control" name="email_id" placeholder="Email Id" required>
+                            </div>
+                        </div>
+                        <div class="form-col">
+                            <label for="abt_family">
+                               Address
+                            </label>
+                            <div class="form-holder">
+                                <i class="zmdi zmdi-pin"></i>
+                                <textarea id="address" class="form-control" name="address" placeholder="Type Here" style="height: 100px;width:200px" required></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label for="username">
+                                UserName (Valie Email ID)
+                            </label>
+                            <div class="form-holder">
+                                <i class="zmdi zmdi-account-o"></i>
+                                    <input type="email" class="form-control" name="username" id="email" value="" required>
+                                    <span id="emailError" style="color:red"> </span><br>                            
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label for="password">
+                                Password
+                            </label>
+                            <div class="form-holder">
+                                <i class="zmdi zmdi-home"></i>
+                                    <input type="password" class="form-control" name="password" id="password" value="" required>
+                                    <span id="message1" style="color:red"> </span> <br>                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-col">
+                            <label for="confirm_password">
+                                Confirm Password
+                            </label>
+                            <div class="form-holder">
+                                <i class="zmdi zmdi-pin"></i>
+                                    <input type="password" class="form-control" name="confirm_password" value="" id="confirm_password" required>
+                                    <span id="message2" style="color:red"> </span> <br>
+                            </div>
+                     </div>
+                    </div>
+                </section>
+                <input class="btn btn-default" type="submit" onclick="store_user_name()" value="Sumbit">                
+            </form>
+		</div>
+
+        <div class="footer_container">
+            <footer class="footer">
+                             © copyright
+                           <a class="footer" href="#"> <p class="footer">terms & comditions</p></a>
+                           <a class="footer" href="#"> <p class="footer"> About us</p></a>
+                            <a class="footer" href="#"><p class="footer">Feedback </p></a>
+                             <a class="footer" href="#"> <p class="footer"> Contact</p></a>
+            
+                             <a class="footer" href="#">  <p class="footer">privacy policy</p></a>
+            
+             </footer>
+        </div>
+        </center>
+
+		<script src="../static/Jscripts/js/jquery-3.3.1.min.js"></script>
+		
+		<!-- JQUERY STEP -->
+		<script src="../static/Jscripts/js/jquery.steps.js"></script>
+
+		<script src="../static/Jscripts/js/main.js"></script>
+        <!--form validation-->
+        <script src="../static/Jscripts/new_user_formValidate.js"></script>
+
+<!-- Template created and distributed by Colorlib -->
+</body>
+<script>
+
+    function store_user_name() {
+    var username = document.getElementById('email');
+    window.localStorage.setItem('username',username.value);
+    localStorage.getItem("username")
+    }
+
+
+</script>
+</html>

@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SearchResult</title>
+</head>
+<body>
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="../static/styles/css/home_style.css">
+  <link rel="stylesheet" href="../static/styles/css/find_match.css">
+  <link rel="stylesheet" href="../static/styles/css/search_result.css">
+
+
+
+
+  <title>Search</title>
+   <style media="screen">
+      body{
+    background-image: url('../static/images/homepage2.jpg'); 
+    background-size: cover;
+    background-repeat: no-repeat;
+    letter-spacing: 2px;
+    font-style: oblique;
+    padding: inherit;
+    background-color: #0b162b;
+    font-family: Artifika;
+    overflow-x: hidden;
+  }
+  </style>
+</head>
+<body>
+
+  <div style="background-image:url('loginpage.jpg'); text-align:center; padding:15px;">
+    <header>
+    <a style="text-decoration:none;"href="{{ url_for('home') }}">  <h1 style="color:white;">Authenticated Secure Matrimony</h1></a>
+
+    </header>
+  </div>
+
+
+  <div class="sticky">
+    <div>
+      <ul class="navbar">
+        <li><a href="{{url_for('home')}}"> HOME </a></li>
+        <li><a class="active" href="{{url_for('match_finder')}}"> Find Your Match </a></li>
+        <li><a href="mailto:abcd@gmail.com">CONTACT US </a></li>
+        <li style="float:right;"><a style="margin-right:0" href="#about">ABOUT</a></li>
+        <li style="float:right;" class="dropdown">
+          <a href="#" class="dropbtn">PROFILE</a>
+          <div class="dropdown-content">
+              {% block content %}
+              {% if profile %}
+                  <a href="{{ url_for('myProfile') }}">My Profile</a>
+                  <a onclick="window.location.href='{{ url_for( 'dropsession') }}';">Log Out</a>
+                  {% else %}
+                  <a href="{{ url_for('login') }}">Log In</a>
+                  <a href="{{ url_for('newUser') }}">Register</a>
+              {% endif %}
+              {% endblock %}          
+            <!-- <a href="#">something</a> -->
+          </div>
+        </li>
+        <li style="float:right;"><a style="margin-right:0" href="{{url_for('interest')}}">INTEREST</a></li>
+      </ul>
+    </div>
+  </div>
+
+    <br>
+
+ <!-- commet -->
+        {% block search_result_content %}
+        {% if search_result|length > 0 %}
+        {% for item  in search_result %}
+        
+    <div class="result_container">
+            <div class="result-row">
+                <div class="result-column">
+                    <small>Profile ID: {{item[0]}}</small>
+                    <div class="image-container">
+                        <img class="profile-image" style="height: 150px;" src="{{item[6]}}" alt="Dummy Image" />
+                    </div>
+                </div>
+                <div class="result-column">
+                    <table id="profile-details">
+                        <caption style="color: white;">Profile Deatils</caption>
+                        <tr>
+                            <th>Name:</th>
+                            <td>{{ item[1] }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Age:</th>
+                            <td>{{ item[2] }}</td>
+                        </tr>
+                        <tr>
+                            <th>Height:</th>
+                            <td>{{ item[3] }} CM</td>
+                        </tr>
+                        <tr>
+                            <th>Caste:</th>
+                            <td>{{ item[4] }}</td>
+                        </tr>
+                        <tr>
+                            <th>Religion:</th>
+                            <td>{{ item[5] }}</td>
+                        </tr>
+                        <tr></tr>
+                    </table>        
+                </div>
+                        <div class="result-column">
+                            <button class="profile-result-btn" type="button" onclick="window.location.href='{{ url_for( 'view_profile' , id=item[0] ) }}';"> View Profile</button>
+                            <!-- <button class="profile-result-btn" onclick=""> Send Interest</button> -->
+                        </div>
+            </div>
+         <br>
+        </div>
+        {% endfor %}
+        {% else %}
+        <h1 style="text-align: center;background-color: rgb(255, 61, 61);">No results found</h1>
+        {% endif %}
+     {% endblock %} 
+<!-- to -->
+
+    <br>
+    <!-- <div class="result-row">
+        <div class="result-column">
+            <div class="image-container">
+                <img class="profile-image" src="http://placehold.it/150x150" alt="Dummy Image" />
+            </div>        </div>
+        <div class="result-column">
+            <table id="profile-details">
+                <caption style="color: white;">Profile Deatils</caption>
+                <tr>
+                    <th>Name:</th>
+                    <td>Some Name</td>
+                </tr>
+                <tr>
+                    <th>Age:</th>
+                    <td>26</td>
+                </tr>
+                <tr>
+                    <th>Height:</th>
+                    <td>193cm</td>
+                </tr>
+                <tr>
+                    <th>Caste:</th>
+                    <td>Caste</td>
+                </tr>
+                <tr>
+                    <th>Religion:</th>
+                    <td>Religion</td>
+                </tr>
+                <tr></tr>
+            </table>        
+        </div>
+                <div class="result-column">
+                    <button class="profile-result-btn" onclick=""> View Profile</button>
+                    <button class="profile-result-btn" onclick=""> Send Interest</button>
+                </div>
+    </div>
+    <br>
+    <div class="result-row">
+        <div class="result-column">
+            <div class="image-container">
+                <img class="profile-image" src="http://placehold.it/150x150" alt="Dummy Image" />
+            </div>        </div>
+        <div class="result-column">
+            <table id="profile-details">
+                <caption style="color: white;">Profile Deatils</caption>
+                <tr>
+                    <th>Name:</th>
+                    <td>Some Name</td>
+                </tr>
+                <tr>
+                    <th>Age:</th>
+                    <td>26</td>
+                </tr>
+                <tr>
+                    <th>Height:</th>
+                    <td>193cm</td>
+                </tr>
+                <tr>
+                    <th>Caste:</th>
+                    <td>Caste</td>
+                </tr>
+                <tr>
+                    <th>Religion:</th>
+                    <td>Religion</td>
+                </tr>
+                <tr></tr>
+            </table>        
+        </div>
+                <div class="result-column">
+                    <button class="profile-result-btn" onclick=""> View Profile</button>
+                    <button class="profile-result-btn" onclick=""> Send Interest</button>
+                </div>
+    </div>
+    <br>
+    <div class="result-row">
+        <div class="result-column">
+            <div class="image-container">
+                <img class="profile-image" src="http://placehold.it/150x150" alt="Dummy Image" />
+            </div>        </div>
+        <div class="result-column">
+            <table id="profile-details">
+                <caption style="color: white;">Profile Deatils</caption>
+                <tr>
+                    <th>Name:</th>
+                    <td>Some Name</td>
+                </tr>
+                <tr>
+                    <th>Age:</th>
+                    <td>26</td>
+                </tr>
+                <tr>
+                    <th>Height:</th>
+                    <td>193cm</td>
+                </tr>
+                <tr>
+                    <th>Caste:</th>
+                    <td>Caste</td>
+                </tr>
+                <tr>
+                    <th>Religion:</th>
+                    <td>Religion</td>
+                </tr>
+                <tr></tr>
+            </table>        
+        </div>
+                <div class="result-column">
+                    <button class="profile-result-btn" onclick=""> View Profile</button>
+                    <button class="profile-result-btn" onclick=""> Send Interest</button>
+                </div>
+    </div>
+  
+    </div> -->
+<!--     
+    <div class="result_container">
+        <section class="search-result-item">
+             <a class="image-link" href="#"><img class="profile-image" src="http://placehold.it/150x150" alt="Dummy Image" /></a>
+                <div class="search-result-item-body">
+                 <div class="row">
+                    <div class="col-sm-9">
+                        <table>
+                            <caption>Profile Deatils</caption>
+                            <tr>
+                                <th>Name:</th>
+                                <td>Some Name</td>
+                            </tr>
+                            <tr>
+                                <th>Age:</th>
+                                <td>26</td>
+                            </tr>
+                            <tr>
+                                <th>Height</th>
+                                <td>193cm</td>
+                            </tr>
+                            <tr>
+                                <th>Caste</th>
+                                <td>Caste</td>
+                            </tr>
+                            <tr>
+                                <th>Religion</th>
+                                <td>Religion</td>
+                            </tr>
+                            <tr></tr>
+                        </table>
+                    </div>
+                    <div class="col-sm-3 text-align-center">
+    
+                        <button class="btn btn-primary btn-info btn-sm" onclick=""> View Profile</button>
+                        <button class="btn btn-primary btn-info btn-sm" onclick=""> Send Interest</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="search-result-item">
+            <a class="image-link" href="#">  <img class="profile-image" src="http://placehold.it/150x150" alt="Dummy Image" /></a>
+               <div class="search-result-item-body">
+                <div class="row">
+                   <div class="col-sm-9">
+                       <table>
+                           <caption>Profile Deatils</caption>
+                           <tr>
+                               <th>Name:</th>
+                               <td>Some Name</td>
+                           </tr>
+                           <tr>
+                               <th>Age:</th>
+                               <td>26</td>
+                           </tr>
+                           <tr>
+                               <th>Height</th>
+                               <td>193cm</td>
+                           </tr>
+                           <tr>
+                               <th>Caste</th>
+                               <td>Caste</td>
+                           </tr>
+                           <tr>
+                               <th>Religion</th>
+                               <td>Religion</td>
+                           </tr>
+                           <tr></tr>
+                       </table>
+                   </div>
+                   <div class="col-sm-3 text-align-center">
+
+                   <button class="btn btn-primary btn-info btn-sm" onclick=""> View Profile</button>
+                   <button class="btn btn-primary btn-info btn-sm" onclick=""> Send Interest</button>
+                   </div>
+               </div>
+           </div>
+       </section>
+
+       <section class="search-result-item">
+        <a class="image-link" href="#">  <img class="profile-image" src="http://placehold.it/150x150" alt="Dummy Image" /></a>
+           <div class="search-result-item-body">
+            <div class="row">
+               <div class="col-sm-9">
+                   <table>
+                       <caption>Profile Deatils</caption>
+                       <tr>
+                           <th>Name:</th>
+                           <td>Some Name</td>
+                       </tr>
+                       <tr>
+                           <th>Age:</th>
+                           <td>26</td>
+                       </tr>
+                       <tr>
+                           <th>Height</th>
+                           <td>193cm</td>
+                       </tr>
+                       <tr>
+                           <th>Caste</th>
+                           <td>Caste</td>
+                       </tr>
+                       <tr>
+                           <th>Religion</th>
+                           <td>Religion</td>
+                       </tr>
+                       <tr></tr>
+                   </table>
+               </div>
+               <div class="col-sm-3 text-align-center">
+
+               <button class="btn btn-primary btn-info btn-sm" onclick=""> View Profile</button>
+               <button class="btn btn-primary btn-info btn-sm" onclick=""> Send Interest</button>
+               </div>
+           </div>
+       </div>
+   </section>
+
+   <section class="search-result-item">
+    <a class="image-link" href="#">  <img class="profile-image" src="http://placehold.it/150x150" alt="Dummy Image" /></a>
+       <div class="search-result-item-body">
+        <div class="row">
+           <div class="col-sm-9">
+               <table>
+                   <caption>Profile Deatils</caption>
+                   <tr>
+                       <th>Name:</th>
+                       <td>Some Name</td>
+                   </tr>
+                   <tr>
+                       <th>Age:</th>
+                       <td>26</td>
+                   </tr>
+                   <tr>
+                       <th>Height</th>
+                       <td>193cm</td>
+                   </tr>
+                   <tr>
+                       <th>Caste</th>
+                       <td>Caste</td>
+                   </tr>
+                   <tr>
+                       <th>Religion</th>
+                       <td>Religion</td>
+                   </tr>
+                   <tr></tr>
+               </table>
+           </div>
+           <div class="col-sm-3 text-align-center">
+
+           <button class="btn btn-primary btn-info btn-sm" onclick=""> View Profile</button>
+           <button class="btn btn-primary btn-info btn-sm" onclick=""> Send Interest</button>
+           </div>
+       </div>
+   </div>
+</section>
+    </div> -->
+
+
+
+   <br>
+      <!-- footer -->
+      <div class="footer_container" style="text-align: center;">
+        <footer class="footer">
+                         © copyright
+                       <a class="footer" href="#"> <p class="footer">terms & comditions</p></a>
+                       <a class="footer" href="#"> <p class="footer"> About us</p></a>
+                        <a class="footer" href="#"><p class="footer">Feedback </p></a>
+                         <a class="footer" href="#"> <p class="footer"> Contact</p></a>
+        
+                         <a class="footer" href="#">  <p class="footer">privacy policy</p></a>
+        
+         </footer>
+    </div>
+</body>
+
+</html>

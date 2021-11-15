@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!-- <script src="../static/Jscripts/new_user_formValidate.js"></script> -->
+    <title>Login</title>
+    <style>
+        .container {
+            margin-top:200px;
+            color: black;
+            max-width: 40%;
+            min-width: 300px;
+            padding: 4%;
+            background-color: #cccccc;
+            opacity: 85%;
+        }
+        body {
+  background-image: url('../static/images/loginpage.jpg'); background-repeat: no-repeat;
+  background-color: #cccccc; /* Used if the image is unavailable */
+  /*height: 500px;  You must set a specified height */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: cover; 
+}
+
+    h1{
+        text-align: center;
+    }
+    a{
+        text-decoration:none;
+        color: black;
+    }
+    .footer{
+        text-decoration: none;
+        color: #fffefe;
+        
+      }
+      .footer_container{
+          margin-bottom: 10px;
+          background-color:#0f1a36;
+          text-align:center;
+          width: 100%;
+          height: auto;
+          padding: 5px;
+          margin-bottom: 3px;
+          opacity: 95%;
+      }
+    </style>
+</head>
+<body style="background-image: url(../static/images/loginpage.jpg)" >
+    <a style="text-decoration:none;"href="{{ url_for('home') }}">  <h1 style="color:white;">Authenticated Secure Matrimony</h1></a>
+
+    <center>
+        {% block content %}
+        {% if alert %}
+            <div class="alert alert-warning alert-dismissible" style="width: 300px;">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Account Does Not Exist!</strong>
+            </div>
+        {% endif %}
+        {% endblock content %}
+        {% block content2 %}
+        {% if accountAdded %}
+            <div class="alert alert-success alert-dismissible" style="width: 300px;">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Account Added successfully! please login ;)</strong>
+            </div>
+        {% endif %}
+        {% endblock content2 %}
+        <div class="container" >
+   
+        <form action="{{ url_for('login') }}" method="POST">
+            <table>
+            <tr>
+                <th>UserName:</th>
+                <td> <input type="text" name="username" id="username" placeholder="Username"> </td>
+            </tr>
+            <tr>
+                <th>Password:</th>
+                <td>  <input type="password" name="password" id="password" placeholder="Password" > </td>
+            </tr>
+            <tr>  </tr>
+            
+        </table> 
+         <input type="submit">
+        </form>
+        <small>Create an New Account and to Register <button><a href=' {{url_for("newUser")}} '> Click Me </a> </button> </small>
+    
+</div>
+</center>
+<br>
+<br>
+<div class="footer_container">
+<footer class="footer">
+    <div>
+      © copyright
+  <a class="footer" href="#"> <p class="footer">terms & comditions</p></a>
+  <a class="footer" href="#"> <p class="footer"> About us</p></a>
+  <a class="footer" href="#"><p class="footer">Feedback </p></a>
+  <a class="footer" href="#"> <p class="footer"> Contact</p></a>
+  
+  <a class="footer" href="#">  <p class="footer">privacy policy</p></a>
+  
+    </div>
+  </footer>
+</div>
+</body>
+</html>

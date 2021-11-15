@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <title>My Profile</title>
+    <script>
+      AOS.init();
+    </script>
+    <meta charset="utf-8">
+    <meta name="author" content="ASHOK">
+    <meta name="tech" content="All about tech news">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/styles/css/home_style.css">
+    <!-- <link rel="stylesheet" href="../static/styles/css/style.css"> -->
+    <link rel="stylesheet" href="../static/styles/css/myProfile.css">
+
+
+
+    
+
+  <style>
+   body{
+    background-image: url('../static/images/homepage2.jpg'); 
+    background-size: cover;
+    background-repeat: no-repeat;
+    letter-spacing: 2px;
+    font-style: oblique;
+    padding: inherit;
+    background-color: #0b162b;
+    font-family: Artifika;
+  }
+ 
+  </style>
+
+  </head>
+
+  <body>
+    <div style="background-image:url('loginpage.jpg'); text-align:center; padding:15px;">
+      <header>
+      <a style="text-decoration:none;"href="{{ url_for('home') }}">  <h1 style="color:white;">Authenticated Secure Matrimony</h1></a>
+
+      </header>
+    </div>
+
+    <div class="sticky">
+      <div>
+        <ul class="navbar">
+          <li><a href="{{url_for('home')}}"> HOME </a></li>
+          <li><a href="{{url_for('match_finder')}}"> Find Your Match </a></li>
+          <li><a href="mailto:abcd@gmail.com">CONTACT US </a></li>
+          <li style="float:right;"><a style="margin-right:0" href="#about">ABOUT</a></li>
+          <li style="float:right;" class="dropdown">
+            <a href="#"  class="dropbtn active">PROFILE</a>
+            <div class="dropdown-content">
+                {% block content %}
+                {% if profile %}
+                    <a class="active" style="color: white;" href="{{ url_for('myProfile') }}">My Profile</a>
+                    <a onclick="window.location.href='{{ url_for( 'dropsession') }}';">Log Out</a>
+                {% else %}
+                    <a href="{{ url_for('login') }}">Log In</a>
+                    <a href="{{ url_for('newUser') }}">Register</a>
+                {% endif %}
+                {% endblock %}          
+              <!-- <a href="#">something</a> -->
+            </div>
+          </li>
+          <li style="float:right;"><a style="margin-right:0" href="{{url_for('interest')}}">INTEREST</a></li>
+        </ul>
+      </div>
+    </div>
+  <!-- profile -->
+
+  {% block my_profile %}
+
+  <div class="profile_container">
+
+    <center>
+                  <!-- change profile photo -->
+                  <form action="{{url_for('change_photo')}}" method="POST" id="wizard" enctype = "multipart/form-data">
+                    <label for="profile_photo">Change Profile Photo</label>
+                    <input type='file' id='profile_photo' class="form-control" name='profile_photo' required>
+                    <br><br>
+                    <input type="submit" onclick="window.alert('Please login again for changes!')" placeholder="Change" value="Change Photo" >
+                  </form>
+      <form action="{{url_for('update_profile')}}" method="POST" id="wizard" enctype = "multipart/form-data">
+        <h4>Profile ID :{{profile_details[0][0]}} </h4>
+      <div class="profile_img-container" style="width: 500px;">
+        <img style="border-radius:100%;width: 150px;" src="../{{profile_details[0][24]}}" alt="">
+        <br>
+
+        <br>
+      </div>
+      
+      <table>
+        <caption>Personal Details</caption>
+        
+
+       
+        <tr>
+          <th>Name:</th>
+          <td>
+            <input type="text" placeholder="Full name..." oninput="this.className = ''" class="form-control" value="{{profile_details[0][3]}}" id="fname" name="fname" required>
+          </td>
+        </tr>
+        <tr>
+          <th>DOB:</th>
+          <td>
+            <input type="date" name="dob" id="dob" placeholder="DOB" value="{{profile_details[0][2]}}" oninput="this.className = ''"  class="form-control">
+          </td>
+        </tr>
+        <tr>
+          <th>Age:</th>
+          <td>
+            <input type="number" value="{{profile_details[0][4]}}"  class="form-control" name="age" id="age" placeholder="Your Age" oninput="this.className = ''">
+          </td>
+        </tr>        
+        <tr>
+          <th>Gender:</th>
+          <td>
+             <!-- <input type="text" name="gender" id="gender" value="{{profile_details[0][29]}}" disabled> -->
+             <select name="gender" id="gender"  class="form-control">
+              <option value="{{profile_details[0][29]}}"> {{profile_details[0][29]}}</option>
+              <option value="male">Male</option>
+              <option value="female">Female</option>
+              </select>
+            </td>
+        </tr>        <tr>
+          <th>Height:</th>
+          <td> 
+            <input type="number" name="height" id="height" value="{{profile_details[0][5]}}"  class="form-control">
+          </td>
+        </tr>        
+        <tr>
+          <th>Color Complexion:</th>
+          <td> 
+            <input type="text" name="complexion" id="complexion" value="{{profile_details[0][6]}}" class="form-control">
+          </td>
+        </tr>        
+        <tr>
+          <th>Highest Qualification:</th>
+          <td> 
+            <input type="text" name="highest_education" id="highest_education" value="{{profile_details[0][7]}}" class="form-control">
+          </td>
+        </tr>        
+        <tr>
+          <th>Profession:</th>
+          <td> 
+            <input type="text" name="profession" id="profession" value="{{profile_details[0][8]}}" class="form-control">
+          </td>
+        </tr>        
+        <tr>
+          <th>Salary:</th>
+          <td> 
+            <input type="text" name="salary" id="salary" value="{{profile_details[0][9]}}" class="form-control">
+          </td>
+        </tr>        
+        <tr>
+          <th> Working Place:</th>
+          <td> 
+            <input type="text" name="working_place" value="{{profile_details[0][10]}}" id="working_place" class="form-control">
+          </td>
+        </tr>   
+        <tr>
+          <th>Native Place:</th>
+          <td> 
+            <input type="text" name="native_place" value="{{profile_details[0][11]}}" id="native_place" class="form-control">
+          </td>
+        </tr>   
+        <tr>
+          <th> Mother Tounge:</th>
+          <td> 
+            <div class="form-holder">
+              <i class="zmdi"></i>
+              <select id="mother_tounge" name="mother_tounge" class="form-control">
+                  <option value="{{profile_details[0][12]}}">{{profile_details[0][12]}}</option>
+                  <option value="tamil">Tamil</option>
+                  <option value="english">English</option>
+                  <option value="kanadam" > Kanadam</option>
+                  <option value="telegu"> Telegu </option>
+                  <option value="malayalam"> Malayalam </option>
+                  <option value="hindi"> Hindi </option>
+              </select>
+        </div>          </td>
+        </tr>   
+        <tr>
+          <th>Religion:</th>
+          <td> 
+            <div class="form-holder">
+              <i class="zmdi zmdi-spellcheck"></i>
+              <select id="religion" name="religion" class="form-control">
+                  <option value="{{profile_details[0][13]}}"> {{profile_details[0][13]}}</option>
+                  <option value="hindu">Hindu</option>
+                  <option value="Christian">Christian</option>
+                  <option value="Buddhist" > Buddhist</option>
+                  <option value="Islam"> Islam </option>
+              </select>                            </div>          </td>
+        </tr>   
+        <tr>
+          <th>Caste:</th>
+          <td> 
+            <div class="form-holder">
+              <i class="zmdi"></i>
+              <select id="caste" name="caste" class="form-control">
+                  <option value="{{profile_details[0][14]}}"> {{profile_details[0][14]}}</option>
+                  <option value="general">General(GNs)</option>
+                  <option value="obc">Other Backward Class(OBC)</option>
+                  <option value="sc" > Scheduled Caste(SC)</option>
+                  <option value="st"> Scheduled Tribe(ST) </option>
+              </select>
+          </div>          </td>
+        </tr>   
+        <tr>
+          <th>Marital Status:</th>
+          <td> 
+            <div class="form-holder">
+              <i class="zmdi zmdi-spellcheck"></i>
+              <select id="material_status" name="material_status" class="form-control">
+                  <option value="{{profile_details[0][15]}}">{{profile_details[0][15]}}</option>
+                  <option value="widow">Widow</option>
+                  <option value="bachelor">Bachelor</option>
+                  <option value="divorced" > divorced</option>
+                  <option value="not_married"> Not Married </option>
+              </select>                            </div>          </td>
+        </tr> 
+        <tr>
+          <th>Physical Status:</th>
+          <td> 
+            <input type="text" name="physical_status" value="{{profile_details[0][16]}}" id="physical_status" class="form-control">
+          </td>
+        </tr>   
+
+      </table>
+      <table>
+        <caption>Family Details</caption>       
+        <tr>
+          <th>Father Name:</th>
+          <td>
+            <input type="text" id="father" name="father" value="{{profile_details[0][17]}}" class="form-control">
+          </td>
+        </tr>
+        <tr>
+          <th>Mother Name:</th>
+          <td>
+            <input type="text" id="mother" name="mother" value="{{profile_details[0][18]}}" class="form-control">                            </div>
+          </td>
+        </tr>
+        <tr>
+          <th>Father Occupation :</th>
+          <td>
+            <input type="text" id="father_occ" name="father_occ" value="{{profile_details[0][19]}}" class="form-control">
+          </td>
+        </tr>        
+        <tr>
+          <th>Mother Occupation:</th>
+          <td>
+            <input type="text" id="mother_occ" name="mother_occ" value="{{profile_details[0][20]}}" class="form-control">
+          </td>
+        </tr>        <tr>
+          <th>Number of Brothers:</th>
+          <td> 
+            <input type="text" name="num_of_brothers" id="num_of_brothers" value="{{profile_details[0][21]}}"  class="form-control">
+          </td>
+        </tr>        
+        <tr>
+          <th>Number Of sisters:</th>
+          <td> 
+            <input type="text" name="num_of_sisters" id="num_of_sisters" value="{{profile_details[0][22]}}" class="form-control">
+          </td>
+        </tr>        
+        <tr>
+          <th>About Family:</th>
+          <td> 
+            <input id="about_famly" value='{{profile_details[0][23]}}' class="form-control" name="about_famly" placeholder="Type Here" style="height: 100px;width:200px">
+          </td>
+        </tr>        
+        <tr>
+      
+        
+        
+      </table>
+    </table>
+    <table>
+      <caption>Contact Details</caption>       
+      <tr>
+        <th>Email ID:</th>
+        <td>
+          <input type="email" id="email_id" class="form-control" name="email_id" value="{{profile_details[0][27]}}" placeholder="Email Id">
+        </td>
+      </tr>
+      <tr>
+        <th>Address:</th>
+        <td>
+          <input type="text" id="address" class="form-control" name="address" value= '{{profile_details[0][28]}}' placeholder="Type Here" style="height: 100px;width:200px">
+        </td>
+      </tr>
+      <tr>
+        <th>Mobile Number:</th>
+        <td>
+          <input type="text" id="mobile_number" name="mobile_number" value="{{profile_details[0][25]}}" class="form-control">
+        </td>
+      </tr>        
+      <tr>
+        <th>Alternate Mobile Number:</th>
+        <td>
+          <input type="text" id="alt_mobile_number" class="form-control" value="{{profile_details[0][26]}}" name="alt_mobile_number" placeholder="Mobile Numbers" >
+        </td>
+      </tr>  
+      
+      
+    </table>
+    <br><br>
+    <table>
+      <caption>Documents</caption>       
+      <tr>
+        <th>Caste Certificate:</th>
+        <td>
+          <embed src="../{{profile_details[0][24][:27]}}{{profile_details[0][1][:-4]}}/{{profile_details[0][1][:-10]}}-caste.pdf" width="500px" height="500px" />
+        </td>
+      </tr>
+      <tr>
+        <th>Birth Certificate:</th>
+        <td>
+          <embed src="../{{profile_details[0][24][:27]}}{{profile_details[0][1][:-4]}}/{{profile_details[0][1][:-10]}}-birth.pdf" width="500px" height="500px" />
+        </td>
+      </tr>
+      <tr>
+        <th>Degree Certificate:</th>
+        <td>
+          <embed src="../{{profile_details[0][24][:27]}}{{profile_details[0][1][:-4]}}/{{profile_details[0][1][:-10]}}-degree.pdf" width="500px" height="500px" />
+        </td>
+      </tr>
+      
+      
+    </table>
+    <br><br>
+    <div style="margin-bottom: 10px;">
+      <button type="submit"> Update Profile</button>
+      <button type="button" id="delete_profile" onclick="alert('Want to delete account!')"> Delete Profile</button>
+    </div>
+    </form>
+    </center>
+
+  </div>
+  {% endblock %}
+
+
+  <br>
+  <br>
+
+  
+<footer>
+  <div style="background-color:#0f1a36;text-align:center;padding:10px;margin-top:7px;">
+    © copyright
+<a class="footer" href="#"> <p class="footer">terms & comditions</p></a>
+<a class="footer" href="#"> <p class="footer"> About us</p></a>
+<a class="footer" href="#"><p class="footer">Feedback </p></a>
+<a class="footer" href="#"> <p class="footer"> Contact</p></a>
+
+<a class="footer" href="#">  <p class="footer">privacy policy</p></a>
+
+  </div>
+</footer>
+  </body>
+</html>
